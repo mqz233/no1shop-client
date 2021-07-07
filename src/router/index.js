@@ -6,6 +6,19 @@ import Register from '@/pages/Register'
 import Home from '@/pages/Home'
 import Search from '@/pages/Search'
 
+//修改push方法,解决连续搜索相同关键字时报错的问题
+const oldPush = VueRouter.prototype.push
+VueRouter.prototype.push = function (location, onResolved, onRejected) {
+    if (onResolved === undefined && onRejected === undefined)
+        // 不要忘记call调用 更改this指向
+        return oldPush.call(this, location).catch((e) => {
+            console.log(e.message);
+        })
+    else {
+        return oldPush.call(this, location, onResolved, onRejected)
+    }
+}
+
 const router = new VueRouter({
     routes: [
 
@@ -37,7 +50,7 @@ const router = new VueRouter({
 
             //命名路由
             name: "search",
-            path: '/search/:keyWord',
+            path: '/search/:keyWord?', //params参数可以传可不传
             component: Search
         },
         {

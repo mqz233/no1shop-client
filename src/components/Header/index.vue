@@ -78,9 +78,18 @@ export default {
       //对象写法 命名路由
       this.$router.push({
         name: "search",
-        params: { keyWord: this.keyWord },
+        // params为空串时 路径会出现问题，怎么解决
+        // 1.在路由配置里设置params可穿可不穿
+        // 2.如果params参数为空时，使其值为undefined
+        params: { keyWord: this.keyWord || undefined },
         query: { keyWord1: this.keyWord.toUpperCase() },
       });
+      // .catch((e) => {console.log(e)});
+
+      //解决连续搜索相同关键字时，报错得问题
+      //（导航到相同的路由）
+      //1用.catch接收处理返回得失败的promise对象
+      //2根据需求重写VueRouter原型上的push方法
     },
   },
 };
