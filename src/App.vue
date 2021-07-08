@@ -17,6 +17,10 @@ export default {
     Footer,
     Header,
   },
+  mounted() {
+    // 一挂载就获取的数据 home和search组件共用
+    this.$store.dispatch("getCategoryList");
+  },
 };
 </script>
 

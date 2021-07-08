@@ -70,25 +70,29 @@ export default {
       // params参数和query参数
       //params体现在路径匹配中 query不会
 
-      //字符串写法
+      // 1字符串写法
       // this.$router.push(
       //   "./search/" + this.keyWord + "?keyWord1=" + this.keyWord.toUpperCase()
       // );
 
-      //对象写法 命名路由
-      this.$router.push({
+      let location = {
         name: "search",
         // params为空串时 路径会出现问题，怎么解决
-        // 1.在路由配置里设置params可穿可不穿
+        // 1.在路由配置里设置params可穿可不穿(加一个?号)
         // 2.如果params参数为空时，使其值为undefined
         params: { keyWord: this.keyWord || undefined },
-        query: { keyWord1: this.keyWord.toUpperCase() },
-      });
-      // .catch((e) => {console.log(e)});
+      };
 
-      //解决连续搜索相同关键字时，报错得问题
-      //（导航到相同的路由）
-      //1用.catch接收处理返回得失败的promise对象
+      // 合并query参数
+      if (this.$route.query) {
+        location.query = this.$route.query;
+      }
+
+      // 2对象写法 命名路由
+      this.$router.push(location);
+
+      //解决连续搜索相同关键字时，会返回一个失败的promise进而会报错
+      //1用.catch接收处理返回得失败的promise对象   // .catch((e) => {console.log(e)});
       //2根据需求重写VueRouter原型上的push方法
     },
   },

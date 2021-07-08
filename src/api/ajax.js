@@ -10,7 +10,7 @@ const service = axios.create({
     timeout: 5000
 })
 
-//2.使用拦截器：添加进度条,直接返回响应内容中的数据
+//2.使用拦截器：添加进度条,直接返回响应内容中的数据 (还可以给请求头添加信息 config是请求报文)
 service.interceptors.request.use(function (config) {
 
     nProgress.start()

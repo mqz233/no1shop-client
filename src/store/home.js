@@ -18,7 +18,7 @@ const mutations = {
 
 const actions = {
 
-    // await async处理promise
+    //  async await处理promise
     // 参数:context 有commit方法 解构赋值得到
 
     //获取目录数据

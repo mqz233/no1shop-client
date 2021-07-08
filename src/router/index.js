@@ -7,6 +7,8 @@ import Home from '@/pages/Home'
 import Search from '@/pages/Search'
 
 //修改push方法,解决连续搜索相同关键字时报错的问题
+// 原因：重复点击 路径没有改变 会返回一个失败的promise
+// 每次都用catch太麻烦，直接修改原型上的方法
 const oldPush = VueRouter.prototype.push
 VueRouter.prototype.push = function (location, onResolved, onRejected) {
     if (onResolved === undefined && onRejected === undefined)
@@ -50,7 +52,7 @@ const router = new VueRouter({
 
             //命名路由
             name: "search",
-            path: '/search/:keyWord?', //params参数可以传可不传
+            path: '/search/:keyWord?', //加问号的话params参数可以传可不传
             component: Search
         },
         {
