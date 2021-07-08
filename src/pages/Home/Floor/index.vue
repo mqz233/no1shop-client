@@ -31,24 +31,7 @@
               <img :src="floor.imgUrl" />
             </div>
             <div class="floorBanner">
-              <div class="swiper-container" ref="floorSwiper">
-                <div class="swiper-wrapper">
-                  <!-- 轮播图 -->
-                  <div
-                    class="swiper-slide"
-                    v-for="(item, index) in floor.carouselList"
-                    :key="index"
-                  >
-                    <img :src="item.imgUrl" />
-                  </div>
-                </div>
-                <!-- 如果需要分页器 -->
-                <div class="swiper-pagination"></div>
-
-                <!-- 如果需要导航按钮 -->
-                <div class="swiper-button-prev"></div>
-                <div class="swiper-button-next"></div>
-              </div>
+              <SlideLoop :bannerList="floor.carouselList" />
             </div>
             <div class="split">
               <span class="floor-x-line"></span>
@@ -81,28 +64,10 @@
 </template>
 
 <script>
-import Swiper from "swiper";
 export default {
   name: "Floor",
   // 声明接收props
   props: ["floor"],
-  mounted() {
-    new Swiper(this.$refs.floorSwiper, {
-      // direction: "vertical", // 垂直切换选项
-      loop: true, // 循环模式选项
-
-      // 如果需要分页器
-      pagination: {
-        el: ".swiper-pagination",
-      },
-
-      // 如果需要前进后退按钮
-      navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-      },
-    });
-  },
 };
 </script>
 

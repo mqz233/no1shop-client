@@ -4,20 +4,7 @@
     <div class="sortList clearfix">
       <div class="center">
         <!--banner轮播-->
-        <!-- 给轮播图打标签 防止类选择了多个DOM节点 -->
-        <div class="swiper-container" ref="bannerSwiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide" v-for="item in bannerList" :key="item.id">
-              <img :src="item.imgUrl" />
-            </div>
-          </div>
-          <!-- 如果需要分页器 -->
-          <div class="swiper-pagination"></div>
-
-          <!-- 如果需要导航按钮 -->
-          <div class="swiper-button-prev"></div>
-          <div class="swiper-button-next"></div>
-        </div>
+        <SlideLoop :bannerList="bannerList" />
       </div>
       <div class="right">
         <div class="news">
@@ -94,9 +81,15 @@
 
 <script>
 import { mapState } from "vuex";
-import Swiper from "swiper";
 export default {
   name: "ListContainer",
+  computed: {
+    // 从vuex中取数据
+    ...mapState({
+      // 从vuex的组件中取数据的格式 映射计算属性 bannerList 来源是 vuex home组件的bannerList属性
+      bannerList: (state) => state.home.bannerList,
+    }),
+  },
   mounted() {
     // 分发任务请求数据 存储到vuex
     this.$store.dispatch("getBannerList");
@@ -125,36 +118,29 @@ export default {
     // }, 2000);
   },
   //解决方法2：watch监视+nextTick最近一次更新才创建对象，保证节点内容完整
-  watch: {
-    bannerList: {
-      handler() {
-        this.$nextTick(() => {
-          new Swiper(this.$refs.bannerSwiper, {
-            // direction: "vertical", // 垂直切换选项
-            loop: true, // 循环模式选项
+  // watch: {
+  //   bannerList: {
+  //     handler() {
+  //       this.$nextTick(() => {
+  //         new Swiper(this.$refs.bannerSwiper, {
+  //           // direction: "vertical", // 垂直切换选项
+  //           loop: true, // 循环模式选项
 
-            // 如果需要分页器
-            pagination: {
-              el: ".swiper-pagination",
-            },
+  //           // 如果需要分页器
+  //           pagination: {
+  //             el: ".swiper-pagination",
+  //           },
 
-            // 如果需要前进后退按钮
-            navigation: {
-              nextEl: ".swiper-button-next",
-              prevEl: ".swiper-button-prev",
-            },
-          });
-        });
-      },
-    },
-  },
-  computed: {
-    // 从vuex中取数据
-    ...mapState({
-      // 从vuex的组件中取数据的格式 映射计算属性 bannerList 来源是 vuex home组件的bannerList属性
-      bannerList: (state) => state.home.bannerList,
-    }),
-  },
+  //           // 如果需要前进后退按钮
+  //           navigation: {
+  //             nextEl: ".swiper-button-next",
+  //             prevEl: ".swiper-button-prev",
+  //           },
+  //         });
+  //       });
+  //     },
+  //   },
+  // },
 };
 </script>
 
