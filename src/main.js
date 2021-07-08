@@ -4,6 +4,12 @@ import router from '@/router'
 import TypeNav from '@/components/TypeNav'
 import store from '@/store'
 
+//引入Mock
+import "@/mock/mockServer"
+
+// 引入swipper的css
+import "swiper/css/swiper.min.css"
+
 //关闭生产提示
 Vue.config.productionTip = false
 
