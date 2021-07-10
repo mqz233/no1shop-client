@@ -64,7 +64,14 @@ export default {
       keyWord: "",
     };
   },
+  mounted() {
+    // 全局事件总线 注册事件 清除关键字
+    this.$bus.$on("clearKeyword", this.clearKeyword);
+  },
   methods: {
+    clearKeyword() {
+      this.keyWord = "";
+    },
     toSearch() {
       // 编程式路由导航
       // params参数和query参数

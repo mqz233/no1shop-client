@@ -2,6 +2,7 @@ import Vue from "vue";
 import Vuex from "vuex"
 //引入home模块
 import home from './home'
+import search from './search'
 
 Vue.use(Vuex)
 const state = {
@@ -26,7 +27,8 @@ const store = new Vuex.Store({
     getters,
     // 使用模块
     modules: {
-        home
+        home,
+        search
     }
 })
 

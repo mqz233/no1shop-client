@@ -25,3 +25,12 @@ export const reqFloorList = () => {
         method: "get"
     })
 }
+
+// 获取搜索的商品数据
+export const reqSearchInfo = (searchParams) => {
+    return request({
+        url: "/list",
+        method: "post",
+        data: searchParams
+    })
+}
