@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from '@/router'
 import TypeNav from '@/components/TypeNav'
 import SlideLoop from '@/components/SlideLoop'
+import Pagination from '@/components/Pagination'
 import store from '@/store'
 
 //引入Mock
@@ -17,6 +18,7 @@ Vue.config.productionTip = false
 //注册全局组件
 Vue.component("TypeNav", TypeNav)
 Vue.component("SlideLoop", SlideLoop)
+Vue.component("Pagination", Pagination)
 
 new Vue({
   beforeCreate() {

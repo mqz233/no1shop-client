@@ -96,7 +96,11 @@ export default {
       }
 
       // 2对象写法 命名路由
-      this.$router.push(location);
+      // 判断当前处于哪个组件，如果是home用push，如果是search用replace
+      if (this.$route.path === "/home") this.$router.push(location);
+      else {
+        this.$router.replace(location);
+      }
 
       //解决连续搜索相同关键字时，会返回一个失败的promise进而会报错
       //1用.catch接收处理返回得失败的promise对象   // .catch((e) => {console.log(e)});

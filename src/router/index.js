@@ -21,6 +21,18 @@ VueRouter.prototype.push = function (location, onResolved, onRejected) {
     }
 }
 
+const oldReplace = VueRouter.prototype.replace
+VueRouter.prototype.replace = function (location, onResolved, onRejected) {
+    if (onResolved === undefined && onRejected === undefined)
+        // 不要忘记call调用 更改this指向
+        return oldReplace.call(this, location).catch((e) => {
+            console.log(e.message);
+        })
+    else {
+        return oldReplace.call(this, location, onResolved, onRejected)
+    }
+}
+
 const router = new VueRouter({
     routes: [
 

@@ -181,7 +181,11 @@ export default {
         if (this.$route.params) {
           location.params = this.$route.params;
         }
-        this.$router.push(location);
+        // 判断当前处于哪个组件，如果是home用push，如果是search用replace
+        if (this.$route.path === "/home") this.$router.push(location);
+        else {
+          this.$router.replace(location);
+        }
       }
     },
     // 鼠标移出div
