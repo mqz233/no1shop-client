@@ -3,6 +3,8 @@ import Vuex from "vuex"
 //引入home模块
 import home from './home'
 import search from './search'
+import detail from './detail'
+import shopcart from './shopcart'
 
 Vue.use(Vuex)
 const state = {
@@ -28,7 +30,9 @@ const store = new Vuex.Store({
     // 使用模块
     modules: {
         home,
-        search
+        search,
+        detail,
+        shopcart
     }
 })
 

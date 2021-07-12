@@ -82,9 +82,12 @@
               <li class="yui3-u-1-5" v-for="item in goodsList" :key="item.id">
                 <div class="list-wrap">
                   <div class="p-img">
-                    <a href="item.html" target="_blank"
+                    <!-- 跳转到详情页 -->
+                    <!-- 注意params参数不能和path参数搭配，要用name -->
+                    <router-link
+                      :to="{ name: 'detail', params: { goodsId: item.id } }"
                       ><img :src="item.defaultImg"
-                    /></a>
+                    /></router-link>
                   </div>
                   <div class="price">
                     <strong>
@@ -93,11 +96,10 @@
                     </strong>
                   </div>
                   <div class="attr">
-                    <a
-                      target="_blank"
-                      href="item.html"
-                      title="促销信息，下单即赠送三个月CIBN视频会员卡！【小米电视新品4A 58 火爆预约中】"
-                      >{{ item.title }}</a
+                    <!-- 详情页 -->
+                    <router-link
+                      :to="{ name: 'detail', params: { goodsId: item.id } }"
+                      >{{ item.title }}</router-link
                     >
                   </div>
                   <div class="commit">

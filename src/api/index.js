@@ -34,3 +34,20 @@ export const reqSearchInfo = (searchParams) => {
         data: searchParams
     })
 }
+
+// 获取商品详情信息
+// /api/item/{ skuId }
+export const reqDetailInfo = (skuId) => {
+    return request({
+        url: `/item/${skuId}`,
+        method: "get"
+    })
+}
+
+// 通知服务器添加购物车的商品和数量
+export const reqAddShopCart = (skuId, skuNum) => {
+    return request({
+        url: `/cart/addToCart/${skuId}/${skuNum}`,
+        method: "post"
+    })
+}
