@@ -51,3 +51,22 @@ export const reqAddShopCart = (skuId, skuNum) => {
         method: "post"
     })
 }
+
+// 获取购物车列表
+// /api/cart/cartList
+export const reqCartList = () => {
+    return request({
+        url: "/cart/cartList",
+        method: "get"
+    })
+}
+
+// 更改复选框状态
+// 商品选中状态 0代表取消选中 1代表选中
+// /api/cart/checkCart/{skuID}/{isChecked}
+export const reqIsChecked = (skuId, isChecked) => {
+    return request({
+        url: `/cart/checkCart/${skuId}/${isChecked}`,
+        method: "get"
+    })
+}

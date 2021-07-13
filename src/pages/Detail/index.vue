@@ -395,7 +395,7 @@ export default {
         sessionStorage.setItem("SKUINFO_KEY", JSON.stringify(this.skuInfo));
 
         // 进行路由跳转
-        this.$router.push("/addCartSuccess?skuNum=" + this.skuNum);
+        this.$router.push("/addcartsuccess?skuNum=" + this.skuNum);
       } catch (error) {
         alert(error.message);
       }

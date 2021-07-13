@@ -4,6 +4,7 @@ import Home from '@/pages/Home'
 import Search from '@/pages/Search'
 import Detail from '@/pages/Detail'
 import AddCartSuccess from '@/pages/AddCartSuccess'
+import ShopCart from '@/pages/ShopCart'
 
 export default [
 
@@ -52,7 +53,12 @@ export default [
     },
     // 购物车添加成功页面
     {
-        path: '/addCartSuccess',
+        path: '/addcartsuccess',
         component: AddCartSuccess
+    },
+    // 购物车页面
+    {
+        path: '/shopcart',
+        component: ShopCart
     }
 ]

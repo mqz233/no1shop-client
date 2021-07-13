@@ -3,6 +3,9 @@ import axios from "axios";
 // import e from "express";
 import nProgress from "nprogress";
 import 'nprogress/nprogress.css'
+// 引入vuex store
+import store from "@/store"
+
 
 //1.配置公共路径 和 超时时间
 const service = axios.create({
@@ -12,6 +15,9 @@ const service = axios.create({
 
 //2.使用拦截器：添加进度条,直接返回响应内容中的数据 (还可以给请求头添加信息 config是请求报文)
 service.interceptors.request.use(function (config) {
+
+    // 给请求添加信息(添加用户的临时标识)
+    config.headers.userTempId = store.state.user.userTempId
 
     nProgress.start()
     return config;
