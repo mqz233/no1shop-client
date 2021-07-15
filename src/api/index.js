@@ -70,3 +70,49 @@ export const reqIsChecked = (skuId, isChecked) => {
         method: "get"
     })
 }
+
+// 获取验证码
+// /user/passport/sendCode/{phone}
+export const reqCode = (phone) => {
+    return request({
+        url: `/user/passport/sendCode/${phone}`,
+        method: "get"
+    })
+}
+
+// 注册用户
+// /api/user/passport/register
+export const reqRegister = (userInfo) => {
+    return request({
+        url: "/user/passport/register",
+        method: "get",
+        data: userInfo
+    })
+}
+
+// 用户登录
+// /api/user/passport/login
+export const reqLogin = (userInfo) => {
+    return request({
+        url: "/user/passport/login",
+        method: "post",
+        data: userInfo
+    })
+}
+
+// 根据token获取用户信息
+//  api/user/passport/auth/getUserInfo
+export const reqUserInfo = () => {
+    return request({
+        url: "/user/passport/auth/getUserInfo",
+        method: "get"
+    })
+}
+
+// 退出登录
+export const reqLogout = () => {
+    return request({
+        url: "/user/passport/logout",
+        method: "get"
+    })
+}

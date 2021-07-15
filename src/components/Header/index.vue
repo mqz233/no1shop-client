@@ -6,12 +6,17 @@
       <div class="container">
         <div class="loginList">
           <p>尚品汇欢迎您！</p>
-          <p>
+          <!-- 用户没有登录 -->
+          <p v-if="!userInfo.name">
             <span>请</span>
             <router-link to="/login">登录</router-link>
             <router-link to="/register" class="register">注册</router-link>
-            <!-- <a href="###">登录</a> -->
-            <!-- <a href="###" class="register">免费注册</a> -->
+          </p>
+          <!-- 用户已经登录 -->
+          <p v-else>
+            <span> </span>
+            <a href="javascript:;">{{ userInfo.name }}</a>
+            <a href="javascript:;" class="register" @click="logout">退出登录</a>
           </p>
         </div>
         <div class="typeList">
@@ -57,6 +62,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   name: "Header",
   data() {
@@ -106,6 +112,22 @@ export default {
       //1用.catch接收处理返回得失败的promise对象   // .catch((e) => {console.log(e)});
       //2根据需求重写VueRouter原型上的push方法
     },
+    // 退出登录
+    async logout() {
+      try {
+        await this.$store.dispatch("getLogout");
+        alert("退出登录成功");
+        // 退出后跳转到主页
+        this.$router.push("/");
+      } catch (error) {
+        alert(error.message);
+      }
+    },
+  },
+  computed: {
+    ...mapState({
+      userInfo: (state) => state.user.userInfo,
+    }),
   },
 };
 </script>

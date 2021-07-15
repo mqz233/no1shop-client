@@ -17,7 +17,12 @@ const service = axios.create({
 service.interceptors.request.use(function (config) {
 
     // 给请求添加信息(添加用户的临时标识)
-    config.headers.userTempId = store.state.user.userTempId
+    if (store.state.user.userTempId)
+        config.headers.userTempId = store.state.user.userTempId
+
+    // 给请求头添加toke信息
+    if (store.state.user.token)
+        config.headers.token = store.state.user.token
 
     nProgress.start()
     return config;
