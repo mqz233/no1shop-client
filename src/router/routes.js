@@ -5,6 +5,12 @@ import Search from '@/pages/Search'
 import Detail from '@/pages/Detail'
 import AddCartSuccess from '@/pages/AddCartSuccess'
 import ShopCart from '@/pages/ShopCart'
+import Pay from '@/pages/Pay'
+import PaySuccess from '@/pages/PaySuccess'
+import Trade from '@/pages/Trade'
+import Center from '@/pages/Center'
+import MyOrder from '@/pages/Center/MyOrder'
+import GroupOrder from '@/pages/Center/GroupOrder'
 
 export default [
 
@@ -60,5 +66,40 @@ export default [
     {
         path: '/shopcart',
         component: ShopCart
+    },
+    // 确认订单
+    {
+        path: '/trade',
+        component: Trade
+    },
+    // 支付页面
+    {
+        path: '/pay',
+        component: Pay
+    },
+    // 支付成功
+    {
+        path: '/paysuccess',
+        component: PaySuccess
+    },
+    // 订单管理页面
+    {
+        path: '/center',
+        component: Center,
+        children: [
+            {
+                path: "groupOrder",
+                component: GroupOrder
+            },
+            {
+                path: "myOrder",
+                component: MyOrder
+            },
+            {
+                path: "",
+                redirect: "/center/myorder"
+            }
+        ],
+
     }
 ]

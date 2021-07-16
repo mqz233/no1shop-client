@@ -116,3 +116,48 @@ export const reqLogout = () => {
         method: "get"
     })
 }
+
+// 获取订单交易页信息
+// /api/order/auth/trade
+export const reqTrade = () => {
+    return request({
+        url: "/order/auth/trade",
+        method: "get"
+    })
+
+}
+
+// 获取用户收货地址
+// /user/userAddress/auth/findUserAddressList
+export const reqUserAddress = () => {
+    return request({
+        url: "/user/userAddress/auth/findUserAddressList",
+        method: "get"
+    })
+}
+
+// 提交订单
+export const reqSubmitOrder = (tradeNo, tradeInfo) => {
+    return request({
+        url: `order/auth/submitOrder?tradeNo=${tradeNo}`,
+        method: "post",
+        data: tradeInfo
+    })
+}
+
+// 根据orderId获取 二维码链接 和 总金额
+export const reqOrderInfo = (orderId) => {
+    return request({
+        url: `/payment/weixin/createNative/${orderId}`,
+        method: "get"
+    })
+}
+
+// 判断支付状态
+// /api/payment/weixin/queryPayStatus/{orderId}
+export const reqPayStatus = (orderId) => {
+    return request({
+        url: `/payment/weixin/queryPayStatus/${orderId}`,
+        method: "get"
+    })
+}

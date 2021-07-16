@@ -1,5 +1,5 @@
 import { getUserTempId } from '@/utils/userabout'
-import { reqCode, reqRegister, reqLogin, reqUserInfo, reqLogout } from '@/api'
+import { reqCode, reqRegister, reqLogin, reqUserInfo, reqLogout, reqUserAddress } from '@/api'
 
 const state = {
     // 用户临时id
@@ -9,7 +9,9 @@ const state = {
     // token尝试从localStorage里取出来 如果取不到说明要登录
     token: localStorage.getItem("TOKEN_KEY"),
     // 用户信息
-    userInfo: {}
+    userInfo: {},
+    // 用户地址
+    userAddressList: []
 }
 
 const mutations = {
@@ -26,6 +28,9 @@ const mutations = {
     RESET_USER(state) {
         state.userInfo = {}
         state.token = ""
+    },
+    RECEIVE_USERADDRESS(state, userAddressList) {
+        state.userAddressList = userAddressList
     }
 }
 
@@ -93,6 +98,17 @@ const actions = {
         }
         else {
             return Promise.reject(new Error("退出失败"))
+        }
+    },
+    // 获取用户地址
+    async getUserAddressList({ commit }) {
+        const result = await reqUserAddress()
+        if (result.code === 200) {
+            commit("RECEIVE_USERADDRESS", result.data)
+            return 'OK'
+        }
+        else {
+            return Promise.reject(new Error("获取用户地址失败"))
         }
     }
 
